@@ -97,7 +97,7 @@ def lr_schedule(epoch):
 # RunDir = '/home/zack/Data/SAH/Code/Gen002/001 - CNN'
 # DataDir = '/home/zack/Data/SAH/Code/Gen002/Data'
 
-DataDir = os.path.join('..', 'Data', '1000_384x512')
+DataDir = os.path.join('..', 'Data', '10000_150x150')
 DataFile = h5py.File(os.path.join(DataDir, 'Craters.hdf5'), 'r+')
 
 # DataDir = '/home/admin/Desktop'

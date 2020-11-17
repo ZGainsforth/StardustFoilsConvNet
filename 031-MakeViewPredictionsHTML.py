@@ -10,6 +10,7 @@ parser.add_argument('--MaxImages', default=-1)
 parser.add_argument('--PredictionsFile', default=os.path.join('..', 'Data', 'Predict', 'amazon20k_predictions.csv'))
 parser.add_argument('--PredictionsFileHTML', default=os.path.join('..', 'Data', 'Predict', 'amazon20k_predictions.html'))
 parser.add_argument('--RelativePath', default='amazon20k')
+parser.add_argument('--CutoffValue', default=0.0, type=float)
 args = parser.parse_args()
 
 print(args.PredictionsFile)
@@ -28,11 +29,12 @@ with open(args.PredictionsFileHTML, 'w') as f:
     f.write('<table>\n')
     f.write('<tr><td>Number</td><td>Prediction</td><td>Image</td><td>Image name</td></tr>\n')
     for i, r in d.iterrows():
-        FileName = os.path.join(args.RelativePath, os.path.split(r.FileName)[-1])
-        if 'id' in r:
-            f.write(f'<tr><td>{i}</td><td>{r.Prediction}</td><td><a href="{FileName}"><img src="{FileName}"/></a></td><td>{os.path.split(r.FileName)[-1]}<br>{r.id}</td></tr>\n')
-        else:
-            f.write(f'<tr><td>{i}</td><td>{r.Prediction}</td><td><a href="{FileName}"><img src="{FileName}"/></a></td><td>{os.path.split(r.FileName)[-1]}</td></tr>\n')
+        if r.Prediction >= args.CutoffValue:
+            FileName = os.path.join(args.RelativePath, os.path.split(r.FileName)[-1])
+            if 'id' in r:
+                f.write(f'<tr><td>{i}</td><td>{r.Prediction}</td><td><a href="{FileName}"><img src="{FileName}"/></a></td><td>{os.path.split(r.FileName)[-1]}<br>{r.id}</td></tr>\n')
+            else:
+                f.write(f'<tr><td>{i}</td><td>{r.Prediction}</td><td><a href="{FileName}"><img src="{FileName}"/></a></td><td>{os.path.split(r.FileName)[-1]}</td></tr>\n')
     f.write('</table>\n')
     f.write('</body>\n')
 

@@ -44,7 +44,7 @@ parser.add_argument('--MaxFiles', default=-1)
 parser.add_argument('--PredictDir', default=os.path.join('..', 'Data', 'Predict', 'amazonimages'))
 parser.add_argument('--PredictionsOutputFile', default=os.path.join('..', 'Data', 'Predict', 'amazonimages.txt'))
 parser.add_argument('--Extension', default='jpg')
-parser.add_argument('--ModelFile', default=os.path.join('..', 'Data', '1000_384x512', 'NFP_actual_acc.h5'))
+parser.add_argument('--ModelFile', default=os.path.join('..', 'Data', '10000_384x512_synthetic', 'NFP_actual_acc.h5'))
 parser.add_argument('--Verbose', default=True)
 args = parser.parse_args()
 
